@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  .dark {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: #ffffff;
+    color: #0a0a0f;
+    font-family: "Inter", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .dark body,
+  body.dark {
+    background-color: #0a0a0f;
+    color: #ffffff;
+  }
+
+  ::selection {
+    background-color: rgba(28, 75, 255, 0.15);
+    color: #0a0a0f;
+  }
+
+  .dark ::selection {
+    background-color: rgba(28, 75, 255, 0.3);
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    outline: 2px solid #1c4bff;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 font-medium select-none
+           transition-all duration-150;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white shadow-primary-glow hover:opacity-90 active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply text-base-400 hover:text-primary bg-transparent;
+  }
+
+  .btn-outline {
+    @apply border text-base-900 border-[rgba(10,10,15,0.12)] hover:border-base-300;
+  }
+
+  .dark .btn-outline {
+    @apply border-white/15 text-white hover:border-white/30;
+  }
+
+  .badge-pill {
+    @apply inline-flex items-center gap-2 text-xs font-medium px-3 py-1.5 rounded-full border;
+  }
+
+  .section-eyebrow {
+    @apply text-xs font-semibold tracking-[0.08em] text-primary mb-4 block;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold tracking-tight font-display text-base-900;
+  }
+
+  .dark .section-title {
+    @apply text-white;
+  }
+
+  .container-content {
+    @apply max-w-content mx-auto px-6;
+  }
+
+  .card {
+    @apply bg-white border border-[rgba(10,10,15,0.08)] rounded-xl;
+  }
+
+  .dark .card {
+    @apply bg-base-800 border-white/10;
+  }
+
+  .section-alt {
+    @apply bg-base-50;
+  }
+
+  .dark .section-alt {
+    @apply bg-[#111118];
+  }
+}
