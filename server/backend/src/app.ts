@@ -84,9 +84,8 @@ export function createApp() {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
   });
 
-  app.get('*', (req, res, next) => {
-    if (req.path.startsWith('/api')) return next();
-    res.sendFile(path.join(publicDir, 'index.html'));
+  app.get('/', (_req, res) => {
+    res.json({ message: 'InstaAuto API Server is running' });
   });
 
   app.use('/api/*', (_req, res) => {
