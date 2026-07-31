@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
 
       if (import.meta.env.VITE_APP_ID) {
         const appClient = createAxiosClient({
-          baseURL: `/api/apps/public`,
+          baseURL: `${import.meta.env.VITE_API_URL || '/api'}/apps/public`,
           headers: { 'X-App-Id': import.meta.env.VITE_APP_ID },
           token,
           interceptResponses: true,
