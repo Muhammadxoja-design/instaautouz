@@ -53,10 +53,22 @@ router.post('/register', async (req: Request, res: Response) => {
       return res.status(409).json({ error: { message: 'Email already registered' } });
     }
 
-    await db.insert(schema.clients).values({
+    const [newClient] = await db.insert(schema.clients).values({
       email,
       passwordHash: hashPassword(password),
       name: name || email.split('@')[0],
+    }).returning();
+
+    const endsAt = new Date();
+    endsAt.setDate(endsAt.getDate() + 7);
+    
+    await db.insert(schema.subscriptions).values({
+      clientId: newClient.id,
+      planType: 'trial',
+      status: 'active',
+      endsAt,
+      maxRules: 5,
+      maxAccounts: 1,
     });
 
     await generateAndSendOtp(email);
