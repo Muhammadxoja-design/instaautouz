@@ -1,8 +1,8 @@
 import { useState, useRef } from "react"
 import DashboardLayout from "../../components/DashboardLayout"
-import { ArrowLeft, Image, Upload, X, Loader2, CalendarIcon } from "lucide-react"
+import { ArrowLeft, Upload, X, Loader2, CalendarIcon } from "lucide-react"
 import { useNavigate } from "react-router-dom"
-import { request } from "../../lib/api-client"
+import { request, db } from "../../lib/api-client"
 import { useTranslation } from "react-i18next"
 
 export default function ContentNew() {
@@ -43,9 +43,7 @@ export default function ContentNew() {
       let mediaUrls = []
       if (media) {
         setUploading(true)
-        const form = new FormData()
-        form.append("file", media)
-        const uploadRes = await request("POST", "/integrations/core/upload", form, true)
+        const uploadRes = await db.integrations.Core.UploadFile(media)
         const uploadData = Array.isArray(uploadRes) ? uploadRes[0] || {} : uploadRes
         if (uploadData.error) throw new Error(uploadData.error?.message || "Upload failed")
         mediaUrls = [uploadData.file_url || uploadData.url || uploadData.path || ""]

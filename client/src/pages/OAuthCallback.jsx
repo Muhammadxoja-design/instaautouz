@@ -20,7 +20,7 @@ export default function OAuthCallback() {
       setError(t('oauth.code_not_found'))
       setTimeout(() => navigate("/login", { replace: true }), 2000)
     }
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [])  
 
   return (
     <div className="min-h-screen bg-white dark:bg-base-900 flex items-center justify-center px-4">

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useTranslation } from "react-i18next"
-import { Users, Settings as SettingsIcon, BarChart3, Activity, DollarSign, TrendingUp, List, Shield, Zap, Crown, Sparkles, Flame } from "lucide-react"
+import { Users, Settings as SettingsIcon, BarChart3, Activity, DollarSign, TrendingUp, Shield, Zap, Crown, Sparkles, Flame } from "lucide-react"
 import { request } from "../../lib/api-client"
 import { Link } from "react-router-dom"
 

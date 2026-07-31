@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import DashboardLayout from "../../components/DashboardLayout"
 import { Plus, BookOpen, Trash2 } from "lucide-react"
-import { request, db } from "../../lib/api-client"
+import { request } from "../../lib/api-client"
 import { useTranslation } from "react-i18next"
 
 const fallbackItems = [

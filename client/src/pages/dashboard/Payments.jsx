@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import DashboardLayout from "../../components/DashboardLayout"
-import { Download, ExternalLink } from "lucide-react"
+import { ExternalLink } from "lucide-react"
 import { db } from "../../lib/api-client"
 import { useTranslation } from "react-i18next"
 import { useSearchParams, useNavigate } from "react-router-dom"

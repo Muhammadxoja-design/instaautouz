@@ -37,9 +37,9 @@ export default function Login() {
     script.setAttribute('data-radius', '12')
     script.setAttribute('data-request-access', 'write')
     script.setAttribute('data-onauth', 'onTelegramAuth(user)')
-    script.async = true
+    script.async = true;
 
-    window.onTelegramAuth = async (user) => {
+    /** @type {any} */ (window).onTelegramAuth = async (user) => {
       setTgLoading(true)
       try {
         const data = await db.auth.loginViaTelegram(user)
@@ -57,7 +57,7 @@ export default function Login() {
     tgBtnRef.current.appendChild(script)
 
     return () => {
-      delete window.onTelegramAuth
+      delete /** @type {any} */ (window).onTelegramAuth
     }
   }, [loginSuccess, navigate, searchParams])
 

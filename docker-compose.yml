@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: instaautouz_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: instaautouz
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  server:
+    build:
+      context: ./server
+    container_name: instaautouz_server
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      # Override the DATABASE_URL to use the internal docker network
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/instaautouz
+    restart: unless-stopped
+
+  client:
+    build:
+      context: ./client
+      args:
+        - VITE_API_URL=${VITE_API_URL:-http://localhost:3000/api}
+        - VITE_APP_ID=${VITE_APP_ID:-}
+        - VITE_TELEGRAM_BOT_USERNAME=${VITE_TELEGRAM_BOT_USERNAME:-}
+        - VITE_CLICK_SERVICE_ID=${VITE_CLICK_SERVICE_ID:-}
+        - VITE_CLICK_MERCHANT_ID=${VITE_CLICK_MERCHANT_ID:-}
+    container_name: instaautouz_client
+    ports:
+      - "5173:80"
+    depends_on:
+      - server
+    restart: unless-stopped
+
+volumes:
+  pgdata:

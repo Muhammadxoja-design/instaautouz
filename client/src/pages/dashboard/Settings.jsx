@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import DashboardLayout from "../../components/DashboardLayout"
-import { User, Bell, Shield, Globe, Save, Check, Eye, EyeOff, ArrowLeft, X, Smartphone } from "lucide-react"
+import { User, Bell, Shield, Globe, Save, Check, Eye, EyeOff, Smartphone } from "lucide-react"
 import { db } from "../../lib/api-client"
 
 export default function Settings() {

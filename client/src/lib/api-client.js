@@ -24,7 +24,7 @@ async function handleResponse(res) {
     let errorData;
     try { errorData = await res.json(); } catch { errorData = {}; }
     const msg = errorData.error?.message || errorData.message || `HTTP ${res.status}`;
-    const error = new Error(msg);
+    const error = /** @type {Error & { status?: number, data?: any }} */ (new Error(msg));
     error.status = res.status;
     error.data = errorData;
     throw error;
@@ -62,6 +62,9 @@ async function request(method, path, body) {
 }
 
 export { request };
+/**
+ * @param {{ baseURL?: string, headers?: any, token?: string, interceptResponses?: boolean }} options
+ */
 export function createAxiosClient({ baseURL, headers, token, interceptResponses } = {}) {
   const clientHeaders = { 'Content-Type': 'application/json', ...headers };
   if (token) clientHeaders['Authorization'] = `Bearer ${token}`;
@@ -91,7 +94,16 @@ const entityRoutes = {
   InstagramAccount: { path: '/ig-accounts', unwrap: (data) => data.accounts || data, unwrapOne: (data) => data.account || data },
 };
 
-export const db = {
+/**
+ * @typedef {Object} EntityService
+ * @property {(filters?: any, orderBy?: string, limit?: number, offset?: number) => Promise<any>} filter
+ * @property {(id: string|number) => Promise<any>} get
+ * @property {(payload: any) => Promise<any>} create
+ * @property {(id: string|number, payload: any) => Promise<any>} update
+ * @property {(id: string|number) => Promise<any>} delete
+ */
+
+export const db = /** @type {{ auth: any, entities: Record<string, EntityService>, integrations: any }} */ ({
   auth: {
     isAuthenticated: async () => {
       return !!getToken();
@@ -250,4 +262,4 @@ export const db = {
       },
     },
   },
-};
+});

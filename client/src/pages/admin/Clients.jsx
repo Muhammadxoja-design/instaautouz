@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useTranslation } from "react-i18next"
-import { Search, Users, Mail, MoreHorizontal, UserCheck, UserX, Filter, Crown, Star } from "lucide-react"
+import { Search, Users, Mail, MoreHorizontal, UserCheck, UserX, Filter } from "lucide-react"
 import { request } from "../../lib/api-client"
 
 const fallbackClients = [

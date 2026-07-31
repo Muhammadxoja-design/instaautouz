@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next"
 import { useSearchParams, useNavigate } from "react-router-dom"
 import DashboardLayout from "../../components/DashboardLayout"
 import { CheckCircle2, XCircle, AlertTriangle, Loader2 } from "lucide-react"
-import { request } from "../../lib/api-client"
 
 export default function PaymentCallback() {
   const { t } = useTranslation()

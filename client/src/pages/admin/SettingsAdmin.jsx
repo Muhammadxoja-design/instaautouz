@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useTranslation } from "react-i18next"
-import { Settings, Save, CheckCircle2, RotateCcw, Globe, Cpu, UserPlus, Sparkles } from "lucide-react"
+import { Settings, Save, CheckCircle2, RotateCcw, Globe, Cpu, UserPlus } from "lucide-react"
 import { request } from "../../lib/api-client"
 
 export default function SettingsAdmin() {
