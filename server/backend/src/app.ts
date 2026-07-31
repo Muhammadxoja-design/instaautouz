@@ -49,6 +49,7 @@ const apiLimiter = rateLimit({
 
 export function createApp() {
   const app = express();
+  app.set('trust proxy', 1);
 
   app.use(helmet({ contentSecurityPolicy: false }));
   app.use(cors({ origin: allowedOrigins, credentials: true }));
