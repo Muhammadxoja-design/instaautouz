@@ -26,21 +26,7 @@ export const AuthProvider = ({ children }) => {
         ? (localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token'))
         : null;
 
-      if (import.meta.env.VITE_APP_ID) {
-        const appClient = createAxiosClient({
-          baseURL: `${import.meta.env.VITE_API_URL || '/api'}/apps/public`,
-          headers: { 'X-App-Id': import.meta.env.VITE_APP_ID },
-          token,
-          interceptResponses: true,
-        });
-
-        try {
-          const publicSettings = await appClient.get(`/prod/public-settings/by-id/${import.meta.env.VITE_APP_ID}`);
-          setAppPublicSettings(publicSettings);
-        } catch (appError) {
-          console.error('App state check failed:', appError);
-        }
-      }
+      setIsLoadingPublicSettings(false);
 
       if (token) {
         await checkUserAuth();
